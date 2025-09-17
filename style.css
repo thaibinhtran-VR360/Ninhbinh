@@ -1,0 +1,78 @@
+/* Reset + fonts */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; background: #f6f8fa; color: #222; line-height: 1.6; }
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; }
+
+/* Header */
+.site-header {
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(90deg,#0d47a1,#1976d2);
+  color: #fff; padding: 10px 18px; position: sticky; top:0; z-index:1000;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-logo { height: 44px; }
+.brand-title { font-weight: bold; font-size: 1.2em; }
+.brand-sub { font-size: 0.8em; opacity: .9; }
+
+.site-nav a {
+  margin-left: 16px; font-weight: bold; color: #fff; transition: opacity .3s;
+}
+.site-nav a:hover { opacity: 0.8; }
+.site-nav a.active { text-decoration: underline; }
+
+/* Hero */
+.hero {
+  background: url('https://picsum.photos/1600/600?travel') no-repeat center/cover;
+  color: #fff; text-align: center; padding: 120px 20px;
+}
+.hero h1 { font-size: 2.5em; margin-bottom: 12px; }
+.hero p { font-size: 1.2em; margin-bottom: 20px; }
+.btn {
+  display: inline-block; background: #ff9800; color: #fff;
+  padding: 10px 20px; border-radius: 6px; font-weight: bold;
+}
+.btn:hover { background: #e68900; }
+
+/* Highlights */
+.highlights { padding: 40px 20px; text-align: center; }
+.highlights h2 { margin-bottom: 20px; }
+.cards { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+.card {
+  background: #fff; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 300px; padding-bottom: 10px;
+}
+.card h3 { margin: 10px 0; }
+.card p { padding: 0 10px; }
+
+/* CTA */
+.cta { padding: 40px 20px; text-align: center; background: #1976d2; color: #fff; }
+.cta h2 { margin-bottom: 10px; }
+
+/* Footer */
+footer { padding: 20px; text-align: center; background: #0d47a1; color: #fff; margin-top: 40px; }
+
+/* Map + VR */
+.page { padding: 20px; max-width: 1200px; margin: auto; }
+.map-toolbar { margin: 10px 0; }
+#searchBox {
+  padding: 8px 10px; border-radius: 6px; border: 1px solid #ccc; min-width: 200px;
+}
+#map { width: 100%; height: 55vh; min-height: 360px; border-radius: 6px; margin-bottom: 20px; }
+#vr-container {
+  display:none; background:#fff; padding:12px; border-radius:6px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+#vrFrame { width: 100%; height: 50vh; min-height: 300px; border: none; border-radius: 6px; }
+
+/* Contact */
+.contact { padding: 40px 20px; max-width: 800px; margin: auto; }
+.contact h2 { margin-bottom: 20px; }
+.contact form { display: flex; flex-direction: column; gap: 12px; }
+.contact input, .contact textarea {
+  padding: 10px; border-radius: 6px; border: 1px solid #ccc;
+}
+.contact button {
+  background: #1976d2; color: #fff; border: none; padding: 10px; border-radius: 6px;
+}
+.contact button:hover { background: #0d47a1; }

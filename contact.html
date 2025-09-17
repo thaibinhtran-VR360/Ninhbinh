@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liên hệ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html").then(r=>r.text()).then(d=>{
+        document.getElementById("header-placeholder").innerHTML = d;
+      });
+    });
+  </script>
+
+  <div class="contact">
+    <h2>Liên hệ với chúng tôi</h2>
+    <p>Hãy gửi tin nhắn cho chúng tôi để được hỗ trợ nhanh nhất.</p>
+    <form>
+      <input type="text" placeholder="Họ và tên" required>
+      <input type="email" placeholder="Email" required>
+      <textarea rows="5" placeholder="Nội dung liên hệ"></textarea>
+      <button type="submit">Gửi</button>
+    </form>
+  </div>
+
+  <footer><p>© 2025 Du lịch Miền Tây</p></footer>
+</body>
+</html>

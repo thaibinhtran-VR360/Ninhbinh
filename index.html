@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang chủ - Du lịch Miền Tây</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html").then(r=>r.text()).then(d=>{
+        document.getElementById("header-placeholder").innerHTML = d;
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <section class="hero">
+    <h1>Khám phá vẻ đẹp Miền Tây</h1>
+    <p>Trải nghiệm hành trình du lịch kết hợp thực tế ảo VR360 độc đáo.</p>
+    <a href="vr.html" class="btn">Khám phá ngay</a>
+  </section>
+
+  <section class="highlights">
+    <h2>Điểm đến nổi bật</h2>
+    <div class="cards">
+      <div class="card"><img src="https://picsum.photos/400/250?1"><h3>Cần Thơ</h3><p>Chợ nổi Cái Răng, nét văn hóa sông nước.</p></div>
+      <div class="card"><img src="https://picsum.photos/400/250?2"><h3>An Giang</h3><p>Lễ hội Bà Chúa Xứ nổi tiếng khắp vùng.</p></div>
+      <div class="card"><img src="https://picsum.photos/400/250?3"><h3>Bạc Liêu</h3><p>Đất công tử Bạc Liêu, giàu truyền thống.</p></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Sẵn sàng cho hành trình?</h2>
+    <p>Khám phá du lịch ảo và lên kế hoạch cho chuyến đi của bạn.</p>
+    <a href="vr.html" class="btn">Bắt đầu ngay</a>
+  </section>
+
+  <footer><p>© 2025 Du lịch Miền Tây</p></footer>
+</body>
+</html>

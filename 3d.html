@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản đồ 3D</title>
+
+  <!-- CSS chung -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Cesium -->
+  <script src="https://unpkg.com/cesium@1.120/Build/Cesium/Cesium.js"></script>
+  <link href="https://unpkg.com/cesium@1.120/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+  <style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+  }
+  #header-placeholder {
+    position: relative;
+    z-index: 1000;
+  }
+  #cesiumContainer {
+    width: 90%;
+    height: 600px;
+    margin: 20px auto; /* căn giữa dưới header */
+    border: 2px solid #2c3e50;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div id="header-placeholder"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html")
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("header-placeholder").innerHTML = data;
+        });
+    });
+  </script>
+
+  <!-- Cesium -->
+  <div id="cesiumContainer"></div>
+
+  <script>
+  // Gán token vào Cesium
+    Cesium.Ion.defaultAccessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlMTM3NzM0NC03NTY2LTQyYzctYjg1Zi04OWMzNjZlZmY0YzkiLCJpZCI6Mjk3NzY4LCJpYXQiOjE3NDU4MTQ3MjB9.UkxR3fFuR4elOFsSQfmtMRDqxBY5kc9tKz1HRhB3zzI";
+    console.log("🔍 Bắt đầu khởi tạo Cesium...");
+    try {
+      // Khởi tạo Viewer với globe mặc định (không terrain)
+      const viewer = new Cesium.Viewer("cesiumContainer", {
+        imageryProvider: new Cesium.IonImageryProvider({ assetId: 3 }), // Bing Maps Aerial
+        baseLayerPicker: true
+      });
+
+      // Fly đến Việt Nam
+      viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(105.8, 10.0, 1500000.0)
+      });
+
+      console.log("✅ Cesium đã load xong!");
+    } catch (err) {
+      console.error("❌ Lỗi Cesium:", err);
+    }
+  </script>
+</body>
+</html>

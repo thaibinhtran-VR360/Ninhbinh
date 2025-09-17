@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Du lịch Ảo - VR360</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch("header.html").then(r=>r.text()).then(d=>{
+        document.getElementById("header-placeholder").innerHTML = d;
+      });
+    });
+  </script>
+
+  <div class="page">
+    <h2>Bản đồ Du lịch Ảo</h2>
+    <div class="map-toolbar"><input id="searchBox" type="search" placeholder="Tìm điểm..."></div>
+    <div id="map"></div>
+
+    <div id="vr-container">
+      <h3 id="placeTitle"></h3>
+      <iframe id="vrFrame"></iframe>
+      <p id="placeDesc"></p>
+      <button onclick="closeVR()">Đóng VR</button>
+    </div>
+  </div>
+
+  <script>
+    const map = L.map('map').setView([10.03, 105.77], 12);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19}).addTo(map);
+
+    const shpLayer = L.layerGroup();
+    const geotiffLayer = L.layerGroup();
+
+    // Demo dropdown
+    const Dropdown = L.Control.extend({
+      onAdd: function(){
+        const div = L.DomUtil.create('div','leaflet-control');
+        div.innerHTML=`<select id="layerSelect">
+          <option value="none">Không lớp</option>
+          <option value="shp">Shapefile</option>
+          <option value="tif">GeoTIFF</option>
+        </select>`;
+        L.DomEvent.disableClickPropagation(div);
+        return div;
+      }
+    });
+    map.addControl(new Dropdown({position:'topleft'}));
+
+    document.addEventListener("change",e=>{
+      if(e.target.id==="layerSelect"){
+        map.removeLayer(shpLayer); map.removeLayer(geotiffLayer);
+        if(e.target.value==="shp") shpLayer.addTo(map);
+        if(e.target.value==="tif") geotiffLayer.addTo(map);
+      }
+    });
+
+    // Demo points
+    const points=[
+      {name:"Cái Răng",coords:[10.002,105.759],vrUrl:"https://www.360cities.net/embed_iframe/halong",desc:"Chợ nổi Cái Răng"},
+      {name:"Bến Ninh Kiều",coords:[10.033,105.783],vrUrl:"https://www.360cities.net/embed_iframe/phuquoc",desc:"Bến Ninh Kiều"}
+    ];
+    points.forEach(p=>{
+      L.marker(p.coords).addTo(map).on('click',()=>openVR(p));
+    });
+
+    function openVR(p){
+      document.getElementById('placeTitle').textContent=p.name;
+      document.getElementById('placeDesc').textContent=p.desc;
+      document.getElementById('vrFrame').src=p.vrUrl;
+      document.getElementById('vr-container').style.display='block';
+    }
+    function closeVR(){
+      document.getElementById('vrFrame').src="";
+      document.getElementById('vr-container').style.display='none';
+    }
+  </script>
+</body>
+</html>
